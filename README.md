@@ -1,3 +1,5 @@
+TESTED ON ZABBIX 6.0 LTS: working as expected
+
 # zabbix-mtr-ping
 Zabbix ping remote hosts over mtr
 
