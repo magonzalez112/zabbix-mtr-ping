@@ -9,9 +9,9 @@
     </groups>
     <templates>
         <template>
-            <template>Template Zabbix MTR Ping</template>
-            <name>Template Zabbix MTR Ping</name>
-            <description>Zabbix MTR ping</description>
+            <template>MTR Ping</template>
+            <name>MTR Ping</name>
+            <description>MTR ping</description>
             <groups>
                 <group>
                     <name>Templates</name>
@@ -119,7 +119,7 @@
     </templates>
     <triggers>
         <trigger>
-            <expression>{Template Zabbix MTR Ping:zabbix_mtr[-n -c 3 --tcp --port 443,s3.eu-west-1.amazonaws.com].last()}=-1</expression>
+            <expression>{MTR Ping:zabbix_mtr[-n -c 3 --tcp --port 443,s3.eu-west-1.amazonaws.com].last()}=-1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>HTTPS TCP connected to AWS S3 eu-west-1 failed</name>
@@ -135,7 +135,7 @@
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Template Zabbix MTR Ping:zabbix_mtr[-n -c 3 --tcp --port 443,s3.eu-west-1.amazonaws.com].last()}&gt;2000</expression>
+            <expression>{MTR Ping:zabbix_mtr[-n -c 3 --tcp --port 443,s3.eu-west-1.amazonaws.com].last()}&gt;2000</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>HTTPS TCP connected to AWS S3 eu-west-1 more than 2000ms</name>
@@ -151,7 +151,7 @@
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Template Zabbix MTR Ping:zabbix_mtr[-n -c 3,8.8.8.8].last()}=-1</expression>
+            <expression>{MTR Ping:zabbix_mtr[-n -c 3,8.8.8.8].last()}=-1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>ICMP Ping to Google Public DNS failed</name>
@@ -167,7 +167,7 @@
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Template Zabbix MTR Ping:zabbix_mtr[-n -c 3,8.8.8.8].last()}&gt;100</expression>
+            <expression>{MTR Ping:zabbix_mtr[-n -c 3,8.8.8.8].last()}&gt;100</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>ICMP Ping to Google Public DNS more than 100ms</name>
@@ -210,7 +210,7 @@
                     <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Template Zabbix MTR Ping</host>
+                        <host>MTR Ping</host>
                         <key>zabbix_mtr[-n -c 3 --tcp --port 443,s3.eu-west-1.amazonaws.com]</key>
                     </item>
                 </graph_item>
@@ -222,7 +222,7 @@
                     <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Template Zabbix MTR Ping</host>
+                        <host>MTR Ping</host>
                         <key>zabbix_mtr[-n -c 3,8.8.8.8]</key>
                     </item>
                 </graph_item>
