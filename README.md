@@ -1,4 +1,7 @@
-TESTED and RUNNING ON PRODUCTION ZABBIX 6.0 LTS: working as expected
+TESTED and RUNNING ON PRODUCTION ZABBIX 6.0 LTS: working as expected.
+
+To do:
+- [ ] Add MACROS for more flexibility
 
 # zabbix-mtr-ping
 Zabbix ping remote hosts over mtr
