@@ -18,6 +18,7 @@ If you are using agent-2 it works as well but the path to place the userparamete
 
 For latest versions of mtr if there is no connection, the output value is 0, if the package is not installed you get -1. In the old xml template you have to adjust triggers to be aware of this, you just need to add an or statement, it is corrected in the yaml template.
 
+One more thing:
 You must increase the timeout in the server and in the agent so the script has enough time to output a result:
 
 # Tuning for /etc/zabbix/zabbix_agentd.conf
