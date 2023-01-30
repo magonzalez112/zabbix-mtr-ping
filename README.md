@@ -1,4 +1,4 @@
-TESTED ON ZABBIX 6.0 LTS: working as expected
+TESTED and RUNNING ON PRODUCTION ZABBIX 6.0 LTS: working as expected
 
 # zabbix-mtr-ping
 Zabbix ping remote hosts over mtr
@@ -14,6 +14,11 @@ Zabbix ping remote hosts over mtr
     sudo -H -u zabbix /opt/zabbix-mtr-ping/zabbix_mtr.sh -n -c 3 8.8.8.8
 
 ```
+If you are using agent-2 it works as well but the path to place the userparameter file is different: `/etc/zabbix/zabbix_agent2.d`
+
+For latest versions of mtr if there is no connection, the output value is 0, if the package is not installed you get -1. In the old xml template you have to adjust triggers to be aware of this, you just need to add an or statement, it is corrected in the yaml template.
+
+You must increase the timeout in the server and in the agent so the script has enough time to output a result:
 
 # Tuning for /etc/zabbix/zabbix_agentd.conf
 ```
