@@ -1,0 +1,84 @@
+zabbix_export:
+  version: '6.0'
+  date: '2023-01-30T08:10:44Z'
+  groups:
+    -
+      uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    -
+      uuid: 2c2403b66e724450be073c782c6c8459
+      template: 'MTR Ping'
+      name: 'MTR Ping'
+      description: 'Zabbix MTR ping'
+      groups:
+        -
+          name: Templates
+      items:
+        -
+          uuid: 22ed9dbd9b0d4b15856fe6e0d60ad8f4
+          name: 'HTTPS TCP connect to AWS eu-west-1 S3 endpoint'
+          key: 'zabbix_mtr[-n -c 3 --tcp --port 443,s3.eu-west-1.amazonaws.com]'
+          delay: '60'
+          history: 30d
+          trends: 90d
+          status: DISABLED
+          value_type: FLOAT
+          units: ms
+          tags:
+            -
+              tag: Application
+              value: 'MTR Ping'
+          triggers:
+            -
+              uuid: 989ce015aa8347ff956496a5997abe7b
+              expression: 'last(/MTR Ping/zabbix_mtr[-n -c 3 --tcp --port 443,s3.eu-west-1.amazonaws.com])=-1'
+              name: 'HTTPS TCP connected to AWS S3 eu-west-1 failed'
+              status: DISABLED
+              priority: HIGH
+            -
+              uuid: 6c6ebbebc0124fcb918e3f5bed6133f0
+              expression: 'last(/MTR Ping/zabbix_mtr[-n -c 3 --tcp --port 443,s3.eu-west-1.amazonaws.com])>2000'
+              name: 'HTTPS TCP connected to AWS S3 eu-west-1 more than 2000ms'
+              status: DISABLED
+              priority: AVERAGE
+        -
+          uuid: 91fdfe3a4bb442a7b0fae49cccefb5ee
+          name: 'Ping to Google'
+          key: 'zabbix_mtr[-n -c 3,8.8.8.8]'
+          delay: '60'
+          history: 30d
+          trends: 90d
+          value_type: FLOAT
+          units: ms
+          tags:
+            -
+              tag: Application
+              value: 'MTR Ping'
+          triggers:
+            -
+              uuid: 3f1f1af5fa6546cf9bc96630756a6f96
+              expression: 'last(/MTR Ping/zabbix_mtr[-n -c 3,8.8.8.8])=0 or last(/MTR Ping/zabbix_mtr[-n -c 3,8.8.8.8])=-1'
+              name: 'ICMP Ping to Google failed'
+              priority: HIGH
+            -
+              uuid: c27fa6a2ff37477a8a4c8c67681c8954
+              expression: 'last(/MTR Ping/zabbix_mtr[-n -c 3,8.8.8.8])>1000'
+              name: 'ICMP Ping to Google more than 1s'
+              priority: AVERAGE
+  graphs:
+    -
+      uuid: e2db0645224942c79332ffe2985dd19b
+      name: 'Ping to External Hosts'
+      graph_items:
+        -
+          color: 1A7C11
+          item:
+            host: 'MTR Ping'
+            key: 'zabbix_mtr[-n -c 3 --tcp --port 443,s3.eu-west-1.amazonaws.com]'
+        -
+          sortorder: '1'
+          color: F63100
+          item:
+            host: 'MTR Ping'
+            key: 'zabbix_mtr[-n -c 3,8.8.8.8]'
